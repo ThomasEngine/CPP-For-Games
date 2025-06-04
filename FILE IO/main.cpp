@@ -7,6 +7,13 @@ struct HighScore
 	uint32_t score; // uint32_t is a 32-bit unsigned integer which is guaranteed 4 bytes
 };
 
+struct TimeScore
+{
+	char level[8];
+	float time;
+	bool unlocked;
+};
+
 int main()
 {
 	std::cout << "Text file: " << std::endl;
@@ -138,5 +145,36 @@ int main()
 		delete[] scores;
 
 	}
+
+	// Create a binary file for my game score system
+	{
+		std::ofstream highscores("LevelScoreData.bin", std::ios::binary); // binary mode
+		if (!highscores)
+		{
+			std::cerr << "ERROR could not open LevelScoreData.bin for writing" << std::endl;
+			return 1; // error
+		}
+
+		TimeScore scores[] = {
+			{"Level 1", 0.f, true},
+			{"Level 2", 0.f, false},
+			{"Level 3", 0.f, false},
+			{"Level 4", 0.f, false},
+			{"Level 5", 0.f, false}
+		};
+		auto numScores = std::size(scores); // get the number of elements in the array
+
+		highscores.write(reinterpret_cast<char*>(&numScores), sizeof(numScores)); // write the number of scores as binary data
+		highscores.write(reinterpret_cast<char*>(scores), numScores * sizeof(highscores)); // write the entire array as binary data,
+
+		if (highscores.bad())
+		{
+			std::cerr << "ERROR while writing to LevelScoreData.bin" << std::endl;
+			return 1; // error
+		}
+		highscores.close();
+	}
 	return 0;
+
+
 }
