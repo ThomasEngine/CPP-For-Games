@@ -174,6 +174,86 @@ int main()
 		}
 		highscores.close();
 	}
+
+	// Read game score file
+	{
+		std::ifstream highscores("LevelScoreData.bin", std::ios::binary); // binary mode
+		if (!highscores)
+		{
+			std::cerr << "ERROR could not open LevelScoreData.bin for reading" << std::endl;
+			return 1; // error
+		}
+
+		size_t numEntries;
+
+		highscores.read(reinterpret_cast<char*>(&numEntries), sizeof(numEntries)); // read the number of scores as binary data
+
+		TimeScore* scores = new TimeScore[numEntries]; // dynamically allocate an array of HighScore structs
+
+		highscores.read(reinterpret_cast<char*>(scores), numEntries * sizeof(TimeScore)); // read the entire array as binary data
+
+		if (highscores.bad())
+		{
+			std::cerr << "ERROR while reading LevelScoreData.bin" << std::endl;
+			return 1; // error
+		}
+
+		for (size_t i = 0; i < numEntries; ++i)
+		{
+			std::cout << scores[i].level << " Time: " << scores[i].time << std::endl;
+		}
+
+		// Level that times should be change user input
+		std::cout << "Enter the level you want to change the time for: ";
+		char level[8];
+		std::cin >> level;
+		for (size_t i = 0; i < numEntries; ++i)
+		{
+			if (level == scores[i].level) // compare the level names
+			{
+				std::cout << "Enter new time for " << scores[i].level << ": ";
+				std::cin >> scores[i].time;
+				scores[i].unlocked = true; // mark the level as unlocked
+				break; // exit the loop once we found the level
+			}
+		}
+		highscores.close();
+		delete[] scores; 
+	}
+	{	
+		// Read new file
+
+		std::ifstream highscores("LevelScoreData.bin", std::ios::binary); // binary mode
+		if (!highscores)
+		{
+			std::cerr << "ERROR could not open LevelScoreData.bin for reading" << std::endl;
+			return 1; // error
+		}
+
+		size_t numEntries;
+
+		highscores.read(reinterpret_cast<char*>(&numEntries), sizeof(numEntries)); // read the number of scores as binary data
+
+		TimeScore* scores = new TimeScore[numEntries]; // dynamically allocate an array of HighScore structs
+
+		highscores.read(reinterpret_cast<char*>(scores), numEntries * sizeof(TimeScore)); // read the entire array as binary data
+
+		if (highscores.bad())
+		{
+			std::cerr << "ERROR while reading LevelScoreData.bin" << std::endl;
+			return 1; // error
+		}
+
+		for (size_t i = 0; i < numEntries; ++i)
+		{
+			std::cout << scores[i].level << " Time: " << scores[i].time << std::endl;
+		}
+
+
+		delete[] scores;
+		highscores.close();
+
+	}
 	return 0;
 
 

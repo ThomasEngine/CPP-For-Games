@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP-For-Games", "CPP-For-Ga
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FILE IO", "FILE IO\FILE IO.vcxproj", "{F06435C8-A8E4-4EB4-AC75-BADC6ED7243B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FILE IO Practice", "FILE IO Practice\FILE IO Practice.vcxproj", "{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{F06435C8-A8E4-4EB4-AC75-BADC6ED7243B}.Release|x64.Build.0 = Release|x64
 		{F06435C8-A8E4-4EB4-AC75-BADC6ED7243B}.Release|x86.ActiveCfg = Release|Win32
 		{F06435C8-A8E4-4EB4-AC75-BADC6ED7243B}.Release|x86.Build.0 = Release|Win32
+		{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}.Debug|x64.ActiveCfg = Debug|x64
+		{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}.Debug|x64.Build.0 = Debug|x64
+		{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}.Debug|x86.ActiveCfg = Debug|Win32
+		{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}.Debug|x86.Build.0 = Debug|Win32
+		{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}.Release|x64.ActiveCfg = Release|x64
+		{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}.Release|x64.Build.0 = Release|x64
+		{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}.Release|x86.ActiveCfg = Release|Win32
+		{C9DAA81C-5F60-4820-9D4B-A5AF1E299C5C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
