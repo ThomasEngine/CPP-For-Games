@@ -2,12 +2,6 @@
 #include <fstream>
 #include <string>
 
-struct HighScore  
-{  
-   char name[4];  
-   uint32_t score; // uint32_t is a 32-bit unsigned integer which is guaranteed 4 bytes  
-};  
-
 struct TimeScore  
 {  
    char level[8];  
@@ -17,7 +11,7 @@ struct TimeScore
 
 // Function to read high scores from a text file and print them
 void readHighScores(int level);
-void writeHighScores(const std::string& levelName, int newScore);
+void writeHighScores(const std::string& levelName, float newScore);
 
 // Variables
 int oldTime;
@@ -78,7 +72,7 @@ void readHighScores(int level) // level to set oldTime to
    highscores.close();  
 }
 
-void writeHighScores(const std::string& levelName, int newScore)
+void writeHighScores(const std::string& levelName, float newScore)
 {
     std::fstream highscores("LevelScoreData.bin", std::ios::in | std::ios::out | std::ios::binary);
     if (!highscores)
@@ -86,7 +80,7 @@ void writeHighScores(const std::string& levelName, int newScore)
         std::cerr << "ERROR could not open LevelScoreData.bin for updating" << std::endl;
         return;
     }
-
+     
     size_t numEntries = 0;
     highscores.read(reinterpret_cast<char*>(&numEntries), sizeof(numEntries)); // Here the numEntries is actually set
 
@@ -100,7 +94,7 @@ void writeHighScores(const std::string& levelName, int newScore)
         if (std::string(score.level) == levelName)
         {
             // Only update if the new score is higher than the old one
-            if (newScore > static_cast<int>(score.time))
+            if (newScore < static_cast<int>(score.time) || score.time == 0.f)
             {
                 score.time = static_cast<float>(newScore);
                 score.unlocked = true;
@@ -113,3 +107,4 @@ void writeHighScores(const std::string& levelName, int newScore)
     }
     highscores.close();
 }
+
